@@ -1,0 +1,26 @@
+body {
+    display: grid;
+    overflow: hidden;
+    width: 100%;
+    grid-template-areas:
+        'usage sysinfo'
+        'usage temperature';
+
+    grid-template-rows: 50% 50%;
+    grid-template-columns: 50% 50%;
+    grid-gap: 10px;
+}
+
+#usage {
+    grid-area: usage;
+    width: 100vh;
+    overflow: auto;
+}
+
+#temperature {
+    grid-area: temperature;
+}
+
+#sysinfo {
+    grid-area: sysinfo;
+}
