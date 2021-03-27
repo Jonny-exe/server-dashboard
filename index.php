@@ -16,10 +16,10 @@
     function print_chart($data)
     {
         print '<table class="charts-css area" id="my-chart"> <tbody>';
-        foreach ($data as $line) {
+        for ($i = 0; $i < count($data); $i += 1) {
             print <<<EOD
                 <tr>
-                    <td style="--start: 0.2; --size: 0.4"> <span class="data"> $ 40K </span> </td>
+                    <td style="--start: ; --size: 0.4"> <span class="data"> $ 40K </span> </td>
                 </tr>
             EOD;
         }
