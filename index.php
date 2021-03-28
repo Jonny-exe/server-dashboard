@@ -1,14 +1,31 @@
+
+<?php
+if(_GET['name']) {
+	// $response['body'] = "HELLO this is me";
+	// $response['response_code'] = 200;
+	// $response['response_desc'] = "OK";
+
+	$json_response = json_encode(array("hello" => "hello"));
+	echo $json_response;
+}
+?>
 <body>
     <link rel="stylesheet" href="https://unpkg.com/charts.css/dist/charts.min.css">
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="index.js" defer></script>
     <?php
 
     function print_response($response, $div_name, $title)
     {
         print "<div id=$div_name class='grid-item'>";
         print "<h1> $title </h1>";
-        foreach ($response as $line) {
-            print $line;
-            print "<br>";
+        if (count($response) != 0) {
+            foreach ($response as $line) {
+                print $line;
+                print "<br>";
+            }
+        } else {
+            print "None";
         }
         print "</div>";
     }
@@ -28,6 +45,8 @@
         print "</tbody> </table>";
     }
 
+	// TEMPERATURE: batcat /sys/class/thermal/thermal_zone0/temp
+
     exec("ps -e -o pid,cmd,%cpu,%mem --sort=-%cpu | head -n 10 | tabulate -1 -f github | cut -f 2- -d '|' | sed '2s/----/    /'", $usage);
     // exec("top | head", $usage);
     // exec("ps -e -o pid,cmd,%cpu,%mem --sort=-%cpu | tabulate -1 -f github | cut -f 2- -d '|' | sed '2s/----/    /'", $output);
@@ -45,5 +64,5 @@
     print_response($reboot, "reboot", "Reboot required");
 
     ?>
-
+HELLO
 </body>
