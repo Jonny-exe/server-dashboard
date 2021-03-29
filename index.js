@@ -1,4 +1,3 @@
-
 let CHART_INDEX = 0
 console.log("HELLO")
 const init = async () => {
@@ -6,10 +5,18 @@ const init = async () => {
 }
 
 const updateChart = async () => {
-    const { data } = await axios.get('http://localhost:3000/chart.php')
-    const { cputemps } = data
+    const {
+        data
+    } = await axios.get('http://localhost:3000/chart.php')
+    const {
+        cputemps
+    } = data
+    if (typeof(cputemps) == "string") {
+        return
+    }
+    debugger
     let temp = 0
-    cputemps.forEach((x, i) => {
+    cputemps.forEach((x) => {
         temp += x / cputemps.length / 1000
     })
     temp = Math.round(temp)
