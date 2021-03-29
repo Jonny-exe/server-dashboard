@@ -1,20 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
 
-<?php
-if(_GET['name']) {
-	// $response['body'] = "HELLO this is me";
-	// $response['response_code'] = 200;
-	// $response['response_desc'] = "OK";
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart</title>
+</head>
 
-	$json_response = json_encode(array("hello" => "hello"));
-	echo $json_response;
-}
-?>
 <body>
     <link rel="stylesheet" href="https://unpkg.com/charts.css/dist/charts.min.css">
-	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="index.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <?php
 
+    header("Access-Control-Allow-Origin: *");
     function print_response($response, $div_name, $title)
     {
         print "<div id=$div_name class='grid-item'>";
@@ -45,7 +45,7 @@ if(_GET['name']) {
         print "</tbody> </table>";
     }
 
-	// TEMPERATURE: batcat /sys/class/thermal/thermal_zone0/temp
+    // TEMPERATURE: batcat /sys/class/thermal/thermal_zone0/temp
 
     exec("ps -e -o pid,cmd,%cpu,%mem --sort=-%cpu | head -n 10 | tabulate -1 -f github | cut -f 2- -d '|' | sed '2s/----/    /'", $usage);
     // exec("top | head", $usage);
@@ -64,5 +64,12 @@ if(_GET['name']) {
     print_response($reboot, "reboot", "Reboot required");
 
     ?>
-HELLO
+    <div id="chart-container">
+        <canvas id="chart">
+
+        </canvas>
+    </div>
+    <script src="./index.js" defer></script>
 </body>
+
+</html>
