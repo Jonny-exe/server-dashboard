@@ -48,8 +48,8 @@ var cpuChart = new Chart(cpuCtx, {
         labels: [],
         datasets: [{
             label: 'Cpu temp',
-            backgroundColor: '#26c6da',
-            borderColor: '#26c6da',
+            backgroundColor: '#282C34',
+            borderColor: '#282C34',
             data: []
         }]
     },
@@ -68,8 +68,8 @@ var usageChart = new Chart(usageCtx, {
         labels: [],
         datasets: [{
             label: 'Usage',
-            backgroundColor: 'purple',
-            borderColor: 'purple',
+            backgroundColor: '#c678dd',
+            borderColor: ' #c678dd',
             data: []
         }]
     },
