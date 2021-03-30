@@ -3,13 +3,14 @@ body {
     background: white;
     overflow: auto;
     padding: 1%;
+    grid-template-columns: 50% 50%;
     grid-template-areas:
         'title title '
-        'usage sysinfo'
-        'usage upgradable'
-        'usage reboot'
-        'chart chart';
+        'sysinfo upgradable'
+        'reboot upgradable'
+        'usage-chart cpu-chart';
     font-family: Arial, Helvetica, sans-serif;
+    /* color: white; */
     color: white;
 
     grid-gap: 1%;
@@ -44,9 +45,21 @@ h1 {
     grid-area: sysinfo;
 }
 
-#chart-container {
+ .chart-container {
     background-color: white;
     grid-area: chart;
+    /* width: 50%;
+    height: 50%; */
+}
+
+#usage-chart-container {
+    background-color: white;
+    grid-area: usage-chart;
+}
+
+#cpu-chart-container {
+    background-color: white;
+    grid-area: cpu-chart;
 }
 
 .grid-item {

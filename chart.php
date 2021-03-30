@@ -28,6 +28,17 @@ function get_cpu_temperature() {
     exec("cat /sys/devices/platform/coretemp.0/hwmon/hwmon$folder_index/temp*_input", $temperature);
 	return $temperature;
 }
-$json_response = json_encode(array("cputemps" => get_cpu_temperature()));
+
+function get_usage() {
+    exec("ps -e -o cmd,%cpu --sort=-%cpu | head -n 10 | tail -n 9", $usage);
+    $new_usage = [];
+    for($i = 0; $i < count($usage); $i++) {
+        $split_usage = explode(" ", $usage[$i]);
+        $new_usage[$i] = Array("task_name" => $split_usage[0], "task_usage" => $split_usage[count($split_usage) - 1]);
+    }
+    return $new_usage;
+}
+
+$json_response = json_encode(array("cputemps" => get_cpu_temperature(), "usage" => get_usage()));
 echo $json_response;
 ?>

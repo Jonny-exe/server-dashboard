@@ -47,7 +47,8 @@
 
     // TEMPERATURE: batcat /sys/class/thermal/thermal_zone0/temp
 
-    exec("ps -e -o pid,cmd,%cpu,%mem --sort=-%cpu | head -n 10 | tabulate -1 -f github | cut -f 2- -d '|' | sed '2s/----/    /'", $usage);
+    // exec("ps -e -o pid,cmd,%cpu,%mem --sort=-%cpu | head -n 10 | tabulate -1 -f github | cut -f 2- -d '|' | sed '2s/----/    /'", $usage);
+
     // exec("top | head", $usage);
     // exec("ps -e -o pid,cmd,%cpu,%mem --sort=-%cpu | tabulate -1 -f github | cut -f 2- -d '|' | sed '2s/----/    /'", $output);
     exec("landscape-sysinfo", $sysinfo);
@@ -58,14 +59,19 @@
 
     print "<link rel='stylesheet' href='styles.css'>";
     print_response($title, "title", "Your server");
-    print_response($usage, "usage", "Programs usage");
+    // print_response($usage, "usage", "Programs usage");
     print_response($sysinfo, "sysinfo", "System info");
     print_response($upgradable, "upgradable", "Apts to be upgraded");
     print_response($reboot, "reboot", "Reboot required");
 
     ?>
-    <div id="chart-container">
-        <canvas id="chart">
+    <div class="chart-container" id="cpu-chart-container">
+        <canvas id="cpu-chart">
+
+        </canvas>
+    </div>
+    <div class="chart-container" id="usage-chart-container">
+        <canvas id="usage-chart">
 
         </canvas>
     </div>

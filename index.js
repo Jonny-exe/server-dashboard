@@ -9,7 +9,8 @@ const updateChart = async () => {
         data
     } = await axios.get('http://localhost:3000/chart.php')
     const {
-        cputemps
+        cputemps,
+        usage
     } = data
     if (typeof(cputemps) == "string") {
         return
@@ -20,15 +21,25 @@ const updateChart = async () => {
         temp += x / cputemps.length / 1000
     })
     temp = Math.round(temp)
-    console.log(temp)
-    chart.data.datasets[0].data.push(temp)
-    chart.data.labels.push(CHART_INDEX++)
-    chart.update()
+
+    cpuChart.data.datasets[0].data.push(temp)
+    cpuChart.data.labels.push(CHART_INDEX++)
+    cpuChart.update()
+
+    usageChart.reset()
+    usageChart.data.labels = []
+    usageChart.data.datasets[0].data = []
+    for (let i = 0; i < usage.length; i++) {
+        usageChart.data.labels.push(usage[i].task_name)
+        usageChart.data.datasets[0].data.push(usage[i].task_usage)
+    }
+    usageChart.update()
+
     setTimeout(updateChart, 1000)
 }
 
-var ctx = document.getElementById('chart').getContext('2d')
-var chart = new Chart(ctx, {
+var cpuCtx = document.getElementById('cpu-chart').getContext('2d')
+var cpuChart = new Chart(cpuCtx, {
     // The type of chart we want to create
     type: 'line',
 
@@ -47,4 +58,23 @@ var chart = new Chart(ctx, {
     options: {}
 });
 
+var usageCtx = document.getElementById('usage-chart').getContext('2d')
+var usageChart = new Chart(usageCtx, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: [],
+        datasets: [{
+            label: 'Usage',
+            backgroundColor: 'purple',
+            borderColor: 'purple',
+            data: []
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
 init()
