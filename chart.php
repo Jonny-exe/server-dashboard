@@ -39,6 +39,23 @@ function get_usage() {
     return $new_usage;
 }
 
-$json_response = json_encode(array("cputemps" => get_cpu_temperature(), "usage" => get_usage()));
+function get_ram_usage() {
+    exec("free --mega | grep Mem | sed -e 's/[^0-9 ]//g'", $ram_usage);
+    $splited_ram_usage = explode(" ", $ram_usage[0]);
+    $count = 0;
+    $result = 0;
+    for ($i = 0; $i < $splited_ram_usage; $i++) {
+        if (intval($splited_ram_usage[$i]) != false) {
+            if ($count == 1) {
+                $result = $i;
+                break;
+            }
+            $count++;
+        }
+    }
+    return intval($splited_ram_usage[$result]);
+}
+
+$json_response = json_encode(array("cputemps" => get_cpu_temperature(), "usage" => get_usage(), "ram_usage" => get_ram_usage()));
 echo $json_response;
 ?>

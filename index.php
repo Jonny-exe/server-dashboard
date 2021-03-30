@@ -13,7 +13,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <?php
-
     header("Access-Control-Allow-Origin: *");
     function print_response($response, $div_name, $title)
     {
@@ -72,6 +71,11 @@
     </div>
     <div class="chart-container" id="usage-chart-container">
         <canvas id="usage-chart">
+
+        </canvas>
+    </div>
+    <div class="chart-container" id="ram-chart-container">
+        <canvas id="ram-chart">
 
         </canvas>
     </div>

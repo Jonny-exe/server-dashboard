@@ -16,10 +16,11 @@ body {
         'title title '
         'sysinfo upgradable'
         'reboot upgradable'
-        'usage-chart cpu-chart';
+        'usage-chart cpu-chart'
+        'ram-chart ram-chart';
     font-family: Arial, Helvetica, sans-serif;
     /* color: white; */
-    color: white;
+    color: black;
 
     grid-gap: 1%;
 }
@@ -53,13 +54,6 @@ h1 {
     grid-area: sysinfo;
 }
 
- .chart-container {
-    background-color: white;
-    grid-area: chart;
-    /* width: 50%;
-    height: 50%; */
-}
-
 #usage-chart-container {
     background-color: white;
     grid-area: usage-chart;
@@ -69,6 +63,19 @@ h1 {
     background-color: white;
     grid-area: cpu-chart;
 }
+
+#ram-chart-container {
+    background-color: white;
+    grid-area: ram-chart;
+}
+
+ .chart-container {
+    background-color: white;
+    grid-area: chart;
+    /* width: 50%;
+    height: 50%; */
+}
+
 
 .grid-item {
     /* margin: 5%; */

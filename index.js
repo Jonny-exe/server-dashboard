@@ -1,5 +1,4 @@
 let CHART_INDEX = 0
-console.log("HELLO")
 const init = async () => {
     setTimeout(updateChart, 1000)
 }
@@ -10,7 +9,8 @@ const updateChart = async () => {
     } = await axios.get('http://localhost:3000/chart.php')
     const {
         cputemps,
-        usage
+        usage,
+        ram_usage
     } = data
     if (typeof(cputemps) == "string") {
         return
@@ -22,9 +22,14 @@ const updateChart = async () => {
     })
     temp = Math.round(temp)
 
+    debugger
+    const ram = ram_usage / 1024
     cpuChart.data.datasets[0].data.push(temp)
+    ramChart.data.datasets[0].data.push(ram)
     cpuChart.data.labels.push(CHART_INDEX++)
+    ramChart.data.labels.push(CHART_INDEX++)
     cpuChart.update()
+    ramChart.update()
 
     usageChart.reset()
     usageChart.data.labels = []
@@ -47,7 +52,7 @@ var cpuChart = new Chart(cpuCtx, {
     data: {
         labels: [],
         datasets: [{
-            label: 'Cpu temp',
+            label: 'Cpu temp (ºC)',
             backgroundColor: '#282C34',
             borderColor: '#282C34',
             data: []
@@ -67,9 +72,30 @@ var usageChart = new Chart(usageCtx, {
     data: {
         labels: [],
         datasets: [{
-            label: 'Usage',
+            label: 'Usage (%)',
             backgroundColor: '#c678dd',
             borderColor: ' #c678dd',
+            data: []
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+
+
+var ramCtx = document.getElementById('ram-chart').getContext('2d')
+var ramChart = new Chart(ramCtx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: [],
+        datasets: [{
+            label: 'Ram usage (Mb)',
+            backgroundColor: '#ABB2BF',
+            borderColor: '#ABB2BF',
             data: []
         }]
     },
