@@ -7,7 +7,7 @@ const init = async () => {
 const updateChart = async () => {
     const {
         data
-    } = await axios.get(`${URL || "http://localhost"}/chart.php`)
+    } = await axios.get(`${URL}/chart.php`)
     const {
         cputemps,
         usage,
