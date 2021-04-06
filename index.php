@@ -72,7 +72,7 @@
 
         </canvas>
     </div>
-    <script src="./index.js" defer></script>
+    <script src="./index.js" type="module" defer></script>
 </body>
 
 </html>

@@ -1,3 +1,4 @@
+import PORT from './env.js'
 let CHART_INDEX = 0
 const init = async () => {
     setTimeout(updateChart, 1000)
@@ -6,7 +7,7 @@ const init = async () => {
 const updateChart = async () => {
     const {
         data
-    } = await axios.get('http://localhost:3000/chart.php')
+    } = await axios.get(`http://localhost:${PORT}/chart.php`)
     const {
         cputemps,
         usage,
