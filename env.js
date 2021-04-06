@@ -1,2 +1,2 @@
-const PORT = 3000
-export default PORT
+const URL = "http://localhost:3000"
+export default URL
