@@ -1,7 +1,7 @@
 import URL from './env.js'
 let CHART_INDEX = 0
 const init = async () => {
-    setTimeout(updateChart, 1000)
+    setInterval(updateChart, 1000)
 }
 
 const updateChart = async () => {
@@ -13,23 +13,21 @@ const updateChart = async () => {
         usage,
         ram_usage
     } = data
-    if (typeof(cputemps) == "string") {
-        return
-    }
-    debugger
-    let temp = 0
-    cputemps.forEach((x) => {
-        temp += x / cputemps.length / 1000
-    })
-    temp = Math.round(temp)
 
-    debugger
+    if (typeof(cputemps) != "string") {
+        let temp = 0
+        cputemps.forEach((x) => {
+            temp += x / cputemps.length / 1000
+        })
+        temp = Math.round(temp)
+        cpuChart.data.datasets[0].data.push(temp)
+        cpuChart.data.labels.push(CHART_INDEX++)
+        cpuChart.update()
+    }
+
     const ram = ram_usage / 1024
-    cpuChart.data.datasets[0].data.push(temp)
     ramChart.data.datasets[0].data.push(ram)
-    cpuChart.data.labels.push(CHART_INDEX++)
     ramChart.data.labels.push(CHART_INDEX++)
-    cpuChart.update()
     ramChart.update()
 
     usageChart.reset()
@@ -40,8 +38,6 @@ const updateChart = async () => {
         usageChart.data.datasets[0].data.push(usage[i].task_usage)
     }
     usageChart.update()
-
-    setTimeout(updateChart, 1000)
 }
 
 var cpuCtx = document.getElementById('cpu-chart').getContext('2d')

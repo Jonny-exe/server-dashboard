@@ -1,2 +1,2 @@
-const URL = "http://localhost:3000"
+const URL = "https://jonny.sytes.net/server-dashboard/"
 export default URL
